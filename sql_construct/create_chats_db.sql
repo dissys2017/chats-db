@@ -47,7 +47,7 @@ CREATE TABLE messages (
     `message` TEXT COMMENT 'Message',
     `time` TIMESTAMP NOT NULL COMMENT 'Message Send Time',
     
-    CONSTRAINT pk_messages_1 PRIMARY KEY (`uid`, `gid`),
+    CONSTRAINT pk_messages_1 PRIMARY KEY (`uid`, `gid`, `time`),
     CONSTRAINT fk_messages_1 FOREIGN KEY (`uid`) REFERENCES `users`(`uid`),
     CONSTRAINT fk_messages_2 FOREIGN KEY (`gid`) REFERENCES `groups`(`gid`)
 );
