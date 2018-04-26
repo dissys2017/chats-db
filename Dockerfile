@@ -11,6 +11,9 @@ WORKDIR /src
 
 COPY . .
 
+## Change \r\n to \n
+RUN for f in ./*.sh; do tr -d '\r' < $f > $f; done
+
 EXPOSE 3306
 
 CMD /etc/init.d/mysql start && \
