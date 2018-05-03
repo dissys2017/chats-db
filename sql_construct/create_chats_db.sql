@@ -23,7 +23,8 @@ CREATE TABLE users_logout (
 USE ChatsDB;
 DROP TABLE IF EXISTS groups;
 CREATE TABLE groups (
-	`gid` INT(16) AUTO_INCREMENT PRIMARY KEY COMMENT 'Group ID',
+	`gid` VARCHAR(16) PRIMARY KEY COMMENT 'Group ID',
+    `groupname` VARCHAR(256) NOT NULL COMMENT 'Group Name',
     `createtime` TIMESTAMP NOT NULL COMMENT 'Group Creation Time'
 );
 
@@ -31,7 +32,7 @@ USE ChatsDB;
 DROP TABLE IF EXISTS belongs_to;
 CREATE TABLE belongs_to (
 	`uid` INT(16) NOT NULL COMMENT 'User ID',
-    `gid` INT(16) NOT NULL COMMENT 'Group ID',
+    `gid` VARCHAR(16) NOT NULL COMMENT 'Group ID',
     `registertime` TIMESTAMP NOT NULL COMMENT 'User Register to Group Time',
     
     CONSTRAINT pk_belongs_to_1 PRIMARY KEY (`uid`, `gid`),
@@ -43,7 +44,7 @@ USE ChatsDB;
 DROP TABLE IF EXISTS messages;
 CREATE TABLE messages (
 	`uid` INT(16) NOT NULL COMMENT 'User ID',
-    `gid` INT(16) NOT NULL COMMENT 'Group ID',
+    `gid` VARCHAR(16) NOT NULL COMMENT 'Group ID',
     `message` TEXT COMMENT 'Message',
     `time` TIMESTAMP NOT NULL COMMENT 'Message Send Time',
     
