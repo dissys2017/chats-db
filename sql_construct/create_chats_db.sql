@@ -1,5 +1,5 @@
 DROP DATABASE IF EXISTS ChatsDB;
-CREATE DATABASE ChatsDB;
+CREATE DATABASE ChatsDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE ChatsDB;
 DROP TABLE IF EXISTS users;
@@ -13,19 +13,19 @@ USE ChatsDB;
 DROP TABLE IF EXISTS users_logout;
 CREATE TABLE users_logout (
 	`uid` INT(16) NOT NULL COMMENT 'User ID',
-    `logouttime` TIMESTAMP NOT NULL COMMENT 'Logout Time',
+    `logouttime` TIMESTAMP(3) NOT NULL COMMENT 'Logout Time',
     
     CONSTRAINT pk_users_logout_1 PRIMARY KEY (`uid`, `logouttime`),
     CONSTRAINT fk_users_logout_1 FOREIGN KEY (`uid`) REFERENCES `users`(`uid`)
 );
-
+ 
 
 USE ChatsDB;
 DROP TABLE IF EXISTS groups;
 CREATE TABLE groups (
 	`gid` VARCHAR(16) PRIMARY KEY COMMENT 'Group ID',
     `groupname` VARCHAR(256) NOT NULL COMMENT 'Group Name',
-    `createtime` TIMESTAMP NOT NULL COMMENT 'Group Creation Time'
+    `createtime` TIMESTAMP(3) NOT NULL COMMENT 'Group Creation Time'
 );
 
 USE ChatsDB;
@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS belongs_to;
 CREATE TABLE belongs_to (
 	`uid` INT(16) NOT NULL COMMENT 'User ID',
     `gid` VARCHAR(16) NOT NULL COMMENT 'Group ID',
-    `registertime` TIMESTAMP NOT NULL COMMENT 'User Register to Group Time',
+    `registertime` TIMESTAMP(3) NOT NULL COMMENT 'User Register to Group Time',
     
     CONSTRAINT pk_belongs_to_1 PRIMARY KEY (`uid`, `gid`),
     CONSTRAINT fk_belongs_to_1 FOREIGN KEY (`uid`) REFERENCES `users`(`uid`),
@@ -46,7 +46,7 @@ CREATE TABLE messages (
 	`uid` INT(16) NOT NULL COMMENT 'User ID',
     `gid` VARCHAR(16) NOT NULL COMMENT 'Group ID',
     `message` TEXT COMMENT 'Message',
-    `time` TIMESTAMP NOT NULL COMMENT 'Message Send Time',
+    `time` TIMESTAMP(3) NOT NULL COMMENT 'Message Send Time',
     
     CONSTRAINT pk_messages_1 PRIMARY KEY (`uid`, `gid`, `time`),
     CONSTRAINT fk_messages_1 FOREIGN KEY (`uid`) REFERENCES `users`(`uid`),
